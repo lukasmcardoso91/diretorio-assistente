@@ -1,73 +1,195 @@
-# Welcome to your Lovable project
+# 🎯 AjudaDiretora - Secretária de Luxo para Educação Infantil
 
-## Project info
+Uma aplicação web inteligente que atua como assistente virtual para diretoras e coordenadoras pedagógicas, oferecendo chat com IA, sistema de lembretes e geração de documentos educacionais.
 
-**URL**: https://lovable.dev/projects/462964e0-4b43-4df4-800c-974aa87441af
+## ✨ Funcionalidades
 
-## How can I edit this code?
+- 🤖 **Chat Inteligente**: Assistente virtual com respostas contextualizadas para educação infantil
+- ⏰ **Sistema de Ações**: Lembretes e agendamentos com integração ao Google Calendar
+- 📋 **Geração de Documentos**: Planos de festa, comunicados e checklists automatizados
+- 🌙 **Tema Claro/Escuro**: Interface adaptável às preferências do usuário
+- 📱 **PWA**: Instalável como app nativo no celular e desktop
+- 🔒 **Privacidade**: Dados armazenados localmente, conformidade LGPD
 
-There are several ways of editing your application.
+## 🚀 Tecnologias
 
-**Use Lovable**
+- **Frontend**: React 18 + TypeScript + Vite
+- **UI**: Tailwind CSS + shadcn/ui + Lucide Icons
+- **Estado**: React Query + Local Storage
+- **Integração**: n8n (webhooks) + Mock system
+- **PWA**: Service Worker + Web Manifest
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/462964e0-4b43-4df4-800c-974aa87441af) and start prompting.
+## 📦 Instalação
 
-Changes made via Lovable will be committed automatically to this repo.
+```bash
+# Clone o repositório
+git clone <repository-url>
+cd ajudadiretora
 
-**Use your preferred IDE**
+# Instale as dependências
+npm install
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+# Configure o ambiente
+cp .env.example .env
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Inicie o desenvolvimento
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## ⚙️ Configuração
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Modo Mock (Desenvolvimento)
+Por padrão, a aplicação roda em modo mock com respostas simuladas:
 
-**Use GitHub Codespaces**
+```env
+VITE_MOCK=true
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Integração com n8n (Produção)
+Para usar com n8n real, configure:
 
-## What technologies are used for this project?
+```env
+VITE_MOCK=false
+VITE_CHAT_URL=http://localhost:5678/webhook/3aefcea5-b1f2-44ce-94bf-6faf62c0ee5d/chat
+VITE_ACTIONS_URL=http://localhost:5678/webhook/actions
+VITE_DOCS_URL=http://localhost:5678/webhook/docs
+```
 
-This project is built with:
+### Expor para Testes Externos
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. **Com ngrok**:
+```bash
+ngrok http 5173
+# Use a URL do ngrok no VITE_ALLOWED_ORIGIN
+```
 
-## How can I deploy this project?
+2. **Com Cloudflare Tunnel**:
+```bash
+cloudflared tunnel --url http://localhost:5173
+```
 
-Simply open [Lovable](https://lovable.dev/projects/462964e0-4b43-4df4-800c-974aa87441af) and click on Share -> Publish.
+## 🎨 Design System
 
-## Can I connect a custom domain to my Lovable project?
+O projeto utiliza um design system customizado baseado em:
+- **Primária**: Sky Blue (`#0ea5e9`)
+- **Secundária**: Orange (`#f97316`)
+- **Gradientes**: Suaves e profissionais
+- **Animações**: Micro-interações elegantes
+- **Responsivo**: Mobile-first approach
 
-Yes, you can!
+## 📱 PWA Features
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- ✅ Instalável em dispositivos móveis e desktop
+- ✅ Funciona offline (interface básica)
+- ✅ Ícones e splash screens personalizados
+- ✅ Shortcuts para ações principais
+- ⏳ Sincronização em background (futuro)
+- ⏳ Push notifications (futuro)
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## 🧪 Scripts
+
+```bash
+npm run dev          # Desenvolvimento
+npm run build        # Build de produção
+npm run preview      # Preview do build
+npm run lint         # Lint do código
+npm run type-check   # Verificação de tipos
+```
+
+## 📂 Estrutura do Projeto
+
+```
+src/
+├── components/          # Componentes React
+│   ├── ui/             # Componentes base (shadcn)
+│   ├── Chat/           # Interface de chat
+│   ├── Layout/         # Layout da aplicação
+│   └── LGPDConsent/    # Modal de consentimento
+├── hooks/              # Hooks customizados
+│   ├── useSession.ts   # Gerenciamento de sessão
+│   ├── useChat.ts      # Lógica do chat
+│   ├── useActions.ts   # Sistema de ações
+│   └── useDocuments.ts # Geração de documentos
+├── lib/                # Utilitários
+│   ├── types.ts        # Definições de tipos
+│   ├── config.ts       # Configuração da app
+│   └── storage.ts      # LocalStorage helpers
+├── mocks/              # Dados e respostas mock
+├── pages/              # Páginas da aplicação
+└── index.css           # Design system
+```
+
+## 🔄 Fluxo de Dados
+
+1. **Sessão**: Criada no primeiro acesso, armazenada localmente
+2. **Chat**: Mensagens processadas via hooks, integração n8n/mock
+3. **Ações**: CRUD local + sincronização opcional com APIs
+4. **Documentos**: Geração baseada em templates + IA (mock/real)
+
+## 🧩 Extensibilidade
+
+### Preparação para Capacitor
+
+O projeto está estruturado para empacotamento futuro:
+
+```bash
+# Instalar Capacitor (quando necessário)
+npm install @capacitor/core @capacitor/cli @capacitor/ios @capacitor/android
+
+# Inicializar
+npx cap init ajudadiretora app.lovable.ajudadiretora
+
+# Adicionar plataformas
+npx cap add ios
+npx cap add android
+
+# Sincronizar
+npm run build
+npx cap sync
+```
+
+### Novas Integrações
+
+- Google Calendar (OAuth via n8n)
+- WhatsApp Business API
+- Sistema de notificações push
+- Backup em nuvem opcional
+
+## 🛡️ Segurança & Privacidade
+
+- ✅ **LGPD**: Consentimento explícito obrigatório
+- ✅ **Local Storage**: Dados ficam no dispositivo
+- ✅ **Headers CORS**: Configuração de origens permitidas
+- ✅ **Sanitização**: Markdown seguro no chat
+- ⏳ **Criptografia**: Para dados sensíveis (futuro)
+
+## 📈 Métricas de Sucesso (MVP)
+
+- [ ] Tarefa completa em ≤ 3 cliques pós-resposta do bot
+- [ ] Documento + ação criados em < 2 minutos
+- [ ] Zero bloqueios por CORS/configuração
+- [ ] PWA instala sem erros
+- [ ] Funciona offline (interface básica)
+
+## 🤝 Contribuição
+
+1. Fork o projeto
+2. Crie uma branch para sua feature
+3. Commit suas mudanças
+4. Push para a branch
+5. Abra um Pull Request
+
+## 📄 Licença
+
+Este projeto está sob licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+
+## 📞 Suporte
+
+Para dúvidas ou suporte:
+- 📧 Email: suporte@ajudadiretora.app
+- 📱 WhatsApp: (xx) xxxxx-xxxx
+- 🌐 Website: https://ajudadiretora.app
+
+---
+
+**AjudaDiretora** - Transformando a gestão educacional com inteligência artificial 🎓✨
