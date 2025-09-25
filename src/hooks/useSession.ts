@@ -22,9 +22,11 @@ export const useSession = () => {
   }, []);
 
   const updateSession = (updates: Partial<Session>) => {
+    console.log('updateSession called', { updates, currentSession: session });
     if (!session) return;
     
     const updatedSession = { ...session, ...updates };
+    console.log('Updated session', updatedSession);
     setSession(updatedSession);
     saveSession(updatedSession);
   };

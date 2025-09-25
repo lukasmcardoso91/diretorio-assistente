@@ -25,6 +25,7 @@ export const LGPDModal = ({ open }: LGPDModalProps) => {
   const [userEmail, setUserEmail] = useState('');
 
   const handleAccept = () => {
+    console.log('Handle accept called', { consent, userName, userEmail });
     updateSession({
       consentLGPD: true,
       userName: userName.trim() || undefined,
@@ -33,8 +34,8 @@ export const LGPDModal = ({ open }: LGPDModalProps) => {
   };
 
   return (
-    <Dialog open={open}>
-      <DialogContent className="max-w-md">
+    <Dialog open={open} onOpenChange={() => {}}>
+      <DialogContent className="max-w-md" onInteractOutside={(e) => e.preventDefault()}>
         <DialogHeader className="text-center">
           <div className="flex justify-center mb-4">
             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-hero">
