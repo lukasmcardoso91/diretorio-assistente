@@ -1,12 +1,12 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Session } from '../lib/types';
 import { getSession, saveSession, generateSessionId } from '../lib/storage';
 
 export const useSession = () => {
-  const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [session, setSession] = React.useState<Session | null>(null);
+  const [loading, setLoading] = React.useState(true);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const existingSession = getSession();
     if (existingSession) {
       setSession(existingSession);
@@ -22,11 +22,9 @@ export const useSession = () => {
   }, []);
 
   const updateSession = (updates: Partial<Session>) => {
-    console.log('updateSession called', { updates, currentSession: session });
     if (!session) return;
     
     const updatedSession = { ...session, ...updates };
-    console.log('Updated session', updatedSession);
     setSession(updatedSession);
     saveSession(updatedSession);
   };

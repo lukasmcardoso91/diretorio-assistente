@@ -25,7 +25,6 @@ export const LGPDModal = ({ open }: LGPDModalProps) => {
   const [userEmail, setUserEmail] = useState('');
 
   const handleAccept = () => {
-    console.log('Handle accept called', { consent, userName, userEmail });
     updateSession({
       consentLGPD: true,
       userName: userName.trim() || undefined,

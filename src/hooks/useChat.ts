@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import type { ChatMessage, ChatRequest, ChatResponse } from '../lib/types';
 import { getMessages, saveMessages, generateId } from '../lib/storage';
 import { config } from '../lib/config';
 import { generateMockResponse } from '../mocks/chatMocks';
 
 export const useChat = (sessionId: string) => {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [messages, setMessages] = React.useState<ChatMessage[]>([]);
+  const [loading, setLoading] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
 
   // Load messages on session change
-  useEffect(() => {
+  React.useEffect(() => {
     if (sessionId) {
       const storedMessages = getMessages(sessionId);
       setMessages(storedMessages);
@@ -18,7 +18,7 @@ export const useChat = (sessionId: string) => {
   }, [sessionId]);
 
   // Save messages when they change
-  useEffect(() => {
+  React.useEffect(() => {
     if (sessionId && messages.length > 0) {
       saveMessages(sessionId, messages);
     }

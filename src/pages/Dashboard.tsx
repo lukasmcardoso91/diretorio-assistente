@@ -7,8 +7,6 @@ import { Calendar, FileText, CheckSquare } from 'lucide-react';
 
 export const Dashboard = () => {
   const { session, loading } = useSession();
-  
-  console.log('Dashboard render', { session, loading, modalOpen: !session?.consentLGPD });
 
   if (loading) {
     return (
