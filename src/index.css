@@ -6,60 +6,60 @@
 
 @layer base {
   :root {
-    /* Base colors */
-    --background: 0 0% 99%;
-    --foreground: 219 15% 15%;
+    /* Base colors - Paleta marrom/bege elegante */
+    --background: 28 26% 96%; /* #F6F0E8 - bege muito claro */
+    --foreground: 15 6% 18%; /* #2F2A26 - texto principal */
 
     /* Card components */
-    --card: 0 0% 100%;
-    --card-foreground: 219 15% 15%;
+    --card: 35 21% 84%; /* #E8DCC5 - surface cards */
+    --card-foreground: 15 6% 18%;
 
     /* Popover components */
-    --popover: 0 0% 100%;
-    --popover-foreground: 219 15% 15%;
+    --popover: 35 21% 84%;
+    --popover-foreground: 15 6% 18%;
 
-    /* Primary brand - Modern sky blue */
-    --primary: 199 89% 48%;
+    /* Primary brand - Marrom médio */
+    --primary: 25 42% 39%; /* #8C6A3D - marrom médio */
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 199 89% 65%;
+    --primary-glow: 25 36% 35%; /* #7A5E37 - primary hover */
 
-    /* Secondary brand - Warm orange */
-    --secondary: 25 95% 53%;
+    /* Secondary/Accent - Terracota */
+    --secondary: 20 58% 48%; /* #C26933 - terracota */
     --secondary-foreground: 0 0% 100%;
-    --secondary-glow: 25 95% 70%;
+    --secondary-glow: 20 58% 45%;
 
     /* Neutral system */
-    --muted: 215 25% 97%;
-    --muted-foreground: 219 15% 45%;
+    --muted: 32 20% 81%; /* #D9CBB4 - borders/dividers */
+    --muted-foreground: 15 9% 35%; /* #5C524A - texto secundário */
 
     /* Accent system */
-    --accent: 215 25% 97%;
-    --accent-foreground: 219 15% 15%;
+    --accent: 20 58% 48%; /* #C26933 - accent para CTAs */
+    --accent-foreground: 0 0% 100%;
 
     /* Status colors */
-    --destructive: 0 75% 55%;
+    --destructive: 0 54% 50%; /* #B24C4C - danger */
     --destructive-foreground: 0 0% 100%;
     
-    --success: 142 76% 36%;
+    --success: 154 26% 49%; /* #6C9A8B - success */
     --success-foreground: 0 0% 100%;
     
-    --warning: 38 92% 50%;
+    --warning: 43 89% 46%; /* #D4A017 - warning */
     --warning-foreground: 0 0% 100%;
 
     /* Interactive elements */
-    --border: 215 25% 90%;
-    --input: 215 25% 90%;
-    --ring: 199 89% 48%;
+    --border: 32 20% 81%; /* #D9CBB4 - bordas sutis */
+    --input: 32 20% 81%;
+    --ring: 25 42% 39%; /* primary para focus */
 
     /* Chat specific */
-    --chat-user: 199 89% 48%;
-    --chat-assistant: 215 25% 97%;
-    --chat-system: 25 95% 96%;
+    --chat-user: 25 42% 39%;
+    --chat-assistant: 35 21% 84%;
+    --chat-system: 28 26% 96%;
 
     /* Action status */
-    --action-scheduled: 199 89% 96%;
-    --action-done: 142 76% 96%;
-    --action-overdue: 0 75% 96%;
+    --action-scheduled: 25 42% 95%;
+    --action-done: 154 26% 95%;
+    --action-overdue: 0 54% 95%;
 
     /* Gradients */
     --gradient-brand: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
@@ -78,60 +78,60 @@
   }
 
   .dark {
-    /* Base colors */
-    --background: 219 20% 6%;
-    --foreground: 210 20% 85%;
+    /* Base colors - Dark mode para paleta marrom */
+    --background: 15 6% 8%; /* Marrom muito escuro */
+    --foreground: 28 26% 92%; /* Texto claro */
 
     /* Card components */
-    --card: 219 20% 8%;
-    --card-foreground: 210 20% 85%;
+    --card: 15 6% 12%; /* Cards escuros */
+    --card-foreground: 28 26% 92%;
 
     /* Popover components */
-    --popover: 219 20% 8%;
-    --popover-foreground: 210 20% 85%;
+    --popover: 15 6% 12%;
+    --popover-foreground: 28 26% 92%;
 
-    /* Primary brand - Brighter in dark */
-    --primary: 199 89% 55%;
-    --primary-foreground: 219 20% 6%;
-    --primary-glow: 199 89% 70%;
+    /* Primary brand - Mais claro no dark */
+    --primary: 25 42% 50%; /* Marrom mais claro */
+    --primary-foreground: 15 6% 8%;
+    --primary-glow: 25 36% 45%;
 
     /* Secondary brand */
-    --secondary: 25 95% 60%;
-    --secondary-foreground: 219 20% 6%;
-    --secondary-glow: 25 95% 75%;
+    --secondary: 20 58% 55%; /* Terracota mais claro */
+    --secondary-foreground: 15 6% 8%;
+    --secondary-glow: 20 58% 50%;
 
     /* Neutral system */
-    --muted: 219 20% 12%;
-    --muted-foreground: 210 20% 55%;
+    --muted: 15 6% 18%; /* Muted escuro */
+    --muted-foreground: 15 9% 60%; /* Texto secundário claro */
 
     /* Accent system */
-    --accent: 219 20% 12%;
-    --accent-foreground: 210 20% 85%;
+    --accent: 20 58% 55%;
+    --accent-foreground: 15 6% 8%;
 
-    /* Status colors - adjusted for dark */
-    --destructive: 0 75% 60%;
+    /* Status colors - ajustados para dark */
+    --destructive: 0 54% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    --success: 142 76% 45%;
+    --success: 154 26% 55%;
     --success-foreground: 0 0% 100%;
     
-    --warning: 38 92% 55%;
+    --warning: 43 89% 55%;
     --warning-foreground: 0 0% 100%;
 
     /* Interactive elements */
-    --border: 219 20% 18%;
-    --input: 219 20% 18%;
-    --ring: 199 89% 55%;
+    --border: 15 6% 25%; /* Bordas escuras */
+    --input: 15 6% 25%;
+    --ring: 25 42% 50%;
 
     /* Chat specific */
-    --chat-user: 199 89% 15%;
-    --chat-assistant: 219 20% 12%;
-    --chat-system: 25 95% 15%;
+    --chat-user: 25 42% 20%;
+    --chat-assistant: 15 6% 18%;
+    --chat-system: 20 58% 20%;
 
     /* Action status */
-    --action-scheduled: 199 89% 15%;
-    --action-done: 142 76% 15%;
-    --action-overdue: 0 75% 15%;
+    --action-scheduled: 25 42% 20%;
+    --action-done: 154 26% 20%;
+    --action-overdue: 0 54% 20%;
 
     /* Gradients */
     --gradient-brand: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));

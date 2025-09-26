@@ -3,23 +3,71 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import type { Block } from '@/lib/types';
+import { toast } from '@/hooks/use-toast';
+import { useState } from 'react';
 
 interface DocumentSuggestionProps {
   block: Block;
 }
 
 export const DocumentSuggestion = ({ block }: DocumentSuggestionProps) => {
-  const handleGenerateDocument = () => {
-    // This will be handled by a modal or navigation
-    // For now, we'll use an event or callback
-    const event = new CustomEvent('openDocumentGenerator', {
-      detail: {
-        type: block.docType,
-        title: block.title,
-        ...block.payload,
+  const [loading, setLoading] = useState(false);
+
+  // N8n integration
+  const callN8n = async (payload: any) => {
+    const response = await fetch("https://attentional-beld-ellsworth.ngrok-free.dev/webhook/3aefcea5-b1f2-44ce-94bf-6faf62c0ee5d/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
       },
+      body: JSON.stringify(payload)
     });
-    window.dispatchEvent(event);
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Erro ${response.status}: ${errorText}`);
+    }
+    
+    return response.json();
+  };
+
+  const handleGenerateDocument = async () => {
+    setLoading(true);
+    try {
+      // Send to n8n
+      await callN8n({
+        userId: "demo",
+        intent: "GERAR_DOCUMENTO",
+        topic: block.title || "Festa de Halloween",
+        context: {
+          origin: "lovable",
+          section: "documentos"
+        }
+      });
+
+      toast({
+        title: '✅ Documento solicitado!',
+        description: `Geração do documento "${block.title}" foi enviada para processamento.`,
+      });
+
+      // Also trigger local event
+      const event = new CustomEvent('openDocumentGenerator', {
+        detail: {
+          type: block.docType,
+          title: block.title,
+          ...block.payload,
+        },
+      });
+      window.dispatchEvent(event);
+    } catch (error) {
+      toast({
+        title: '❌ Erro ao gerar documento',
+        description: String(error),
+        variant: 'destructive',
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const getDocTypeLabel = (type: string) => {
@@ -55,6 +103,7 @@ export const DocumentSuggestion = ({ block }: DocumentSuggestionProps) => {
           size="sm"
           variant="secondary"
           onClick={handleGenerateDocument}
+          disabled={loading}
           className="shrink-0"
         >
           <Plus className="h-3 w-3 mr-1" />

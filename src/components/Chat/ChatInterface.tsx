@@ -10,12 +10,16 @@ import { useSession } from '@/hooks/useSession';
 import { ChatMessage } from './ChatMessage';
 import { QuickActionChips } from './QuickActionChips';
 import { LoadingIndicator } from './LoadingIndicator';
+import { N8nResponseCard } from './N8nResponseCard';
 import { QUICK_ACTIONS } from '@/lib/config';
+import { toast } from '@/hooks/use-toast';
 
 export const ChatInterface = () => {
   const { session } = useSession();
   const { messages, loading, sendMessage } = useChat(session?.sessionId || '');
   const [input, setInput] = useState('');
+  const [n8nLoading, setN8nLoading] = useState(false);
+  const [n8nResponse, setN8nResponse] = useState<any>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -31,11 +35,54 @@ export const ChatInterface = () => {
     inputRef.current?.focus();
   }, []);
 
+  // N8n integration
+  const callN8n = async (payload: any) => {
+    const response = await fetch("https://attentional-beld-ellsworth.ngrok-free.dev/webhook/3aefcea5-b1f2-44ce-94bf-6faf62c0ee5d/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+        // "Authorization": "Basic " + btoa("lovable:segredo123") // Uncomment if Basic Auth needed
+      },
+      body: JSON.stringify(payload)
+    });
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Erro ${response.status}: ${errorText}`);
+    }
+    
+    return response.json();
+  };
+
   const handleSend = async () => {
-    if (!input.trim() || loading || !session) return;
+    if (!input.trim() || loading || n8nLoading || !session) return;
     
     const message = input.trim();
     setInput('');
+    
+    // Send to n8n
+    setN8nLoading(true);
+    try {
+      const data = await callN8n({
+        userId: "demo",
+        message: message,
+        context: {
+          origin: "lovable",
+          section: "chat"
+        }
+      });
+      setN8nResponse(data);
+    } catch (error) {
+      toast({
+        title: "Erro na comunicação",
+        description: String(error),
+        variant: "destructive"
+      });
+    } finally {
+      setN8nLoading(false);
+    }
+    
+    // Also send to local chat system
     await sendMessage(message, session.userName, session.userEmail);
   };
 
@@ -103,7 +150,11 @@ export const ChatInterface = () => {
             <ChatMessage key={message.id} message={message} />
           ))}
           
-          {loading && <LoadingIndicator />}
+          {n8nResponse && (
+            <N8nResponseCard response={n8nResponse} />
+          )}
+          
+          {(loading || n8nLoading) && <LoadingIndicator />}
         </div>
       </ScrollArea>
 
@@ -121,7 +172,7 @@ export const ChatInterface = () => {
           />
           <Button
             onClick={handleSend}
-            disabled={!input.trim() || loading}
+            disabled={!input.trim() || loading || n8nLoading}
             size="icon"
             className="shrink-0"
           >
