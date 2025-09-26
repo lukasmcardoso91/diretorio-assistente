@@ -35,7 +35,7 @@ export const ChatInterface = () => {
     inputRef.current?.focus();
   }, []);
 
-  // N8n integration
+  console.log('N8N Integration active - calling webhook...');
   const callN8n = async (payload: any) => {
     const response = await fetch("https://attentional-beld-ellsworth.ngrok-free.dev/webhook/3aefcea5-b1f2-44ce-94bf-6faf62c0ee5d/chat", {
       method: "POST",
