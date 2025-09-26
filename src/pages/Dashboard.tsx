@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSession } from '@/hooks/useSession';
 import { LGPDModal } from '@/components/LGPDConsent/LGPDModal';
 import { ChatInterface } from '@/components/Chat/ChatInterface';
