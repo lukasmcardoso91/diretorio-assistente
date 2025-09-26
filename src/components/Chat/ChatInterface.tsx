@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { Send, Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,26 +17,27 @@ import { QUICK_ACTIONS } from '@/lib/config';
 export const ChatInterface = () => {
   const { session } = useSession();
   const { messages, loading, sendMessage } = useChat(session?.sessionId || '');
-  const [input, setInput] = useState('');
-  const [n8nLoading, setN8nLoading] = useState(false);
-  const [n8nResponse, setN8nResponse] = useState<any>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [input, setInput] = React.useState('');
+  const [n8nLoading, setN8nLoading] = React.useState(false);
+  const [n8nResponse, setN8nResponse] = React.useState<any>(null);
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   // Auto scroll to bottom
-  useEffect(() => {
+  React.useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages]);
 
   // Focus input on mount
-  useEffect(() => {
+  React.useEffect(() => {
     inputRef.current?.focus();
   }, []);
 
-  console.log('N8N Integration active - calling webhook...');
+  // N8n integration
   const callN8n = async (payload: any) => {
+    console.log('N8N Integration active - calling webhook...');
     const response = await fetch("https://attentional-beld-ellsworth.ngrok-free.dev/webhook/3aefcea5-b1f2-44ce-94bf-6faf62c0ee5d/chat", {
       method: "POST",
       headers: {

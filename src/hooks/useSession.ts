@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import type { Session } from '../lib/types';
 import { getSession, saveSession, generateSessionId } from '../lib/storage';
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import type { ChatMessage, ChatRequest, ChatResponse } from '../lib/types';
 import { getMessages, saveMessages, generateId } from '../lib/storage';
 import { config } from '../lib/config';

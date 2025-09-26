@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FileText, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -11,7 +11,7 @@ interface DocumentSuggestionProps {
 }
 
 export const DocumentSuggestion = ({ block }: DocumentSuggestionProps) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   // N8n integration
   const callN8n = async (payload: any) => {

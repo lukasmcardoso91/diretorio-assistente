@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import type { DocumentItem, DocumentFormData } from '../lib/types';
 import { getDocuments, saveDocuments, generateId } from '../lib/storage';
 import { config } from '../lib/config';

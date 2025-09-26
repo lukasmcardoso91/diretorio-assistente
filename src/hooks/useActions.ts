@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import type { Action } from '../lib/types';
 import { getActions, saveActions, generateId } from '../lib/storage';
 import { config } from '../lib/config';
