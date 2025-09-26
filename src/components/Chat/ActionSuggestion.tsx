@@ -1,10 +1,10 @@
+import React, { useState } from 'react';
 import { Calendar, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import type { Block } from '@/lib/types';
 import { useActions } from '@/hooks/useActions';
 import { toast } from '@/hooks/use-toast';
-import { useState } from 'react';
 
 interface ActionSuggestionProps {
   block: Block;

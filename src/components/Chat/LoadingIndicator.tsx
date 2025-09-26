@@ -1,3 +1,4 @@
+import React from 'react';
 import { Bot } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 

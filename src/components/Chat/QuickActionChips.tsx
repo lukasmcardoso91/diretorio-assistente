@@ -1,3 +1,4 @@
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { QUICK_ACTIONS } from '@/lib/config';
 import { cn } from '@/lib/utils';

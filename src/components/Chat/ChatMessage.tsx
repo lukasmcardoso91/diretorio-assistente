@@ -1,3 +1,4 @@
+import React from 'react';
 import { User, Bot, AlertTriangle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';

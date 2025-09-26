@@ -1,10 +1,10 @@
+import React, { useState } from 'react';
 import { FileText, Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import type { Block } from '@/lib/types';
 import { toast } from '@/hooks/use-toast';
-import { useState } from 'react';
 
 interface DocumentSuggestionProps {
   block: Block;
