@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import type { Block } from '@/lib/types';
-import { toast } from '@/hooks/use-toast';
+// import { toast } from '@/hooks/use-toast';
 
 interface DocumentSuggestionProps {
   block: Block;
@@ -45,10 +45,7 @@ export const DocumentSuggestion = ({ block }: DocumentSuggestionProps) => {
         }
       });
 
-      toast({
-        title: '✅ Documento solicitado!',
-        description: `Geração do documento "${block.title}" foi enviada para processamento.`,
-      });
+      console.log('✅ Documento solicitado!', `Geração do documento "${block.title}" foi enviada para processamento.`);
 
       // Also trigger local event
       const event = new CustomEvent('openDocumentGenerator', {
@@ -60,11 +57,7 @@ export const DocumentSuggestion = ({ block }: DocumentSuggestionProps) => {
       });
       window.dispatchEvent(event);
     } catch (error) {
-      toast({
-        title: '❌ Erro ao gerar documento',
-        description: String(error),
-        variant: 'destructive',
-      });
+      console.log('❌ Erro ao gerar documento:', String(error));
     } finally {
       setLoading(false);
     }

@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import type { Block } from '@/lib/types';
 import { useActions } from '@/hooks/useActions';
-import { toast } from '@/hooks/use-toast';
+// import { toast } from '@/hooks/use-toast';
 
 interface ActionSuggestionProps {
   block: Block;
@@ -59,16 +59,9 @@ export const ActionSuggestion = ({ block }: ActionSuggestionProps) => {
         notes: `Ação sugerida pelo assistente virtual`,
       });
 
-      toast({
-        title: '✅ Ação agendada!',
-        description: `"${block.title}" foi adicionada aos seus lembretes.`,
-      });
+      console.log('✅ Ação agendada!', `"${block.title}" foi adicionada aos seus lembretes.`);
     } catch (error) {
-      toast({
-        title: '❌ Erro ao agendar',
-        description: String(error),
-        variant: 'destructive',
-      });
+      console.log('❌ Erro ao agendar:', String(error));
     } finally {
       setLoading(false);
     }

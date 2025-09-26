@@ -12,7 +12,7 @@ import { QuickActionChips } from './QuickActionChips';
 import { LoadingIndicator } from './LoadingIndicator';
 import { N8nResponseCard } from './N8nResponseCard';
 import { QUICK_ACTIONS } from '@/lib/config';
-import { toast } from '@/hooks/use-toast';
+// import { toast } from '@/hooks/use-toast';
 
 export const ChatInterface = () => {
   const { session } = useSession();
@@ -73,11 +73,7 @@ export const ChatInterface = () => {
       });
       setN8nResponse(data);
     } catch (error) {
-      toast({
-        title: "Erro na comunicação",
-        description: String(error),
-        variant: "destructive"
-      });
+      console.log("Erro na comunicação:", String(error));
     } finally {
       setN8nLoading(false);
     }
