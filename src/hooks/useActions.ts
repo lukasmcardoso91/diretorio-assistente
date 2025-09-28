@@ -1,21 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Action } from '../lib/types';
 import { getActions, saveActions, generateId } from '../lib/storage';
 import { config } from '../lib/config';
 
 export const useActions = () => {
-  const [actions, setActions] = React.useState<Action[]>([]);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
+  const [actions, setActions] = useState<Action[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Load actions on mount
-  React.useEffect(() => {
+  useEffect(() => {
     const storedActions = getActions();
     setActions(storedActions);
   }, []);
 
   // Save actions when they change
-  React.useEffect(() => {
+  useEffect(() => {
     saveActions(actions);
   }, [actions]);
 

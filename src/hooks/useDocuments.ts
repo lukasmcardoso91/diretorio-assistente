@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import type { DocumentItem, DocumentFormData } from '../lib/types';
 import { getDocuments, saveDocuments, generateId } from '../lib/storage';
 import { config } from '../lib/config';
 import { generateMockDocument } from '../mocks/documentMocks';
 
 export const useDocuments = () => {
-  const [documents, setDocuments] = React.useState<DocumentItem[]>([]);
-  const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState<string | null>(null);
+  const [documents, setDocuments] = useState<DocumentItem[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Load documents on mount
-  React.useEffect(() => {
+  useEffect(() => {
     const storedDocuments = getDocuments();
     setDocuments(storedDocuments);
   }, []);
 
   // Save documents when they change
-  React.useEffect(() => {
+  useEffect(() => {
     saveDocuments(documents);
   }, [documents]);
 

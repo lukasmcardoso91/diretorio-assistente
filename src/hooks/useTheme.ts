@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 type Theme = 'light' | 'dark' | 'system';
 
 export const useTheme = () => {
-  const [theme, setTheme] = React.useState<Theme>('system');
+  const [theme, setTheme] = useState<Theme>('system');
 
-  React.useEffect(() => {
+  useEffect(() => {
     const stored = localStorage.getItem('ajudadiretora-theme') as Theme;
     if (stored) {
       setTheme(stored);
     }
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove('light', 'dark');
 

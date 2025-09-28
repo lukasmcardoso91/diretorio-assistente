@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Send, Bot } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,21 +17,21 @@ import { toast } from '@/hooks/use-toast';
 export const ChatInterface = () => {
   const { session } = useSession();
   const { messages, loading, sendMessage } = useChat(session?.sessionId || '');
-  const [input, setInput] = React.useState('');
-  const [n8nLoading, setN8nLoading] = React.useState(false);
-  const [n8nResponse, setN8nResponse] = React.useState<any>(null);
-  const scrollRef = React.useRef<HTMLDivElement>(null);
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const [input, setInput] = useState('');
+  const [n8nLoading, setN8nLoading] = useState(false);
+  const [n8nResponse, setN8nResponse] = useState<any>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Auto scroll to bottom
-  React.useEffect(() => {
+  useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
   }, [messages]);
 
   // Focus input on mount
-  React.useEffect(() => {
+  useEffect(() => {
     inputRef.current?.focus();
   }, []);
 

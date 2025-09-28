@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Check, Shield, Eye, Lock } from 'lucide-react';
 import {
   Dialog,
@@ -20,9 +20,9 @@ interface LGPDModalProps {
 
 export const LGPDModal = ({ open }: LGPDModalProps) => {
   const { updateSession } = useSession();
-  const [consent, setConsent] = React.useState(false);
-  const [userName, setUserName] = React.useState('');
-  const [userEmail, setUserEmail] = React.useState('');
+  const [consent, setConsent] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [userEmail, setUserEmail] = useState('');
 
   const handleAccept = () => {
     updateSession({

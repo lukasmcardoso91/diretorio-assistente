@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import type { Session } from '../lib/types';
 import { getSession, saveSession, generateSessionId } from '../lib/storage';
 
 export const useSession = () => {
-  const [session, setSession] = React.useState<Session | null>(null);
-  const [loading, setLoading] = React.useState(true);
+  const [session, setSession] = useState<Session | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const existingSession = getSession();
     if (existingSession) {
       setSession(existingSession);
